@@ -87,6 +87,24 @@ textarea, input[type="text"] {
     margin-right: 10px;
 }
 
+.response-container {
+    position: relative;
+}
+
+.copy-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.copy-icon:hover {
+    color: #6200ee;
+}
+
 .response {
     white-space: pre-wrap;
     background: #3e3e3e;

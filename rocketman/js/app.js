@@ -53,6 +53,7 @@ function resetRequest(index) {
     };
     saveRequests();
     renderRequests();
+    updateRequestSelector();
     selectRequest(index);
     saveSelectedIndex(index);
 }
@@ -60,8 +61,8 @@ function resetRequest(index) {
 function updateRequest(index, key, value) {
     requests[index][key] = value;
     saveRequests();
-    updateRequestSelector();
     renderRequests();
+    updateRequestSelector();
     selectRequest(index);
     saveSelectedIndex(index);
 }
@@ -90,16 +91,14 @@ function sendRequest(index) {
         }
         request.response = JSON.stringify(data, null, 2);
         saveRequests();
-
-        // Atualize o responseDiv diretamente
-        document.getElementById(`response-${index}`).innerText = request.response;
+        renderRequests();
+        selectRequest(index);
     })
     .catch(error => {
         request.response = error.toString();
         saveRequests();
-
-        // Atualize o responseDiv diretamente
-        document.getElementById(`response-${index}`).innerText = request.response;
+        renderRequests();
+        selectRequest(index);
     });
 }
 
@@ -166,9 +165,25 @@ function renderRequests() {
         sendButton.onclick = () => sendRequest(index);
 
         const responseDiv = document.createElement('div');
-        responseDiv.className = 'response';
-        responseDiv.id = `response-${index}`; // Adicionado identificador único
-        responseDiv.innerText = request.response;
+        responseDiv.className = 'response-container';
+        responseDiv.id = `response-${index}`;
+
+        const copyIcon = document.createElement('span');
+        copyIcon.className = 'copy-icon';
+        copyIcon.innerHTML = '<i class="fas fa-copy"></i>';
+        copyIcon.style.display = request.response.trim() ? 'block' : 'none';
+        copyIcon.onclick = () => {
+            navigator.clipboard.writeText(request.response)
+                .then(() => alert('Response copied to clipboard!'))
+                .catch(err => alert('Failed to copy response: ', err));
+        };
+
+        const responseContent = document.createElement('div');
+        responseContent.className = 'response';
+        responseContent.innerText = request.response;
+
+        responseDiv.appendChild(copyIcon);
+        responseDiv.appendChild(responseContent);
 
         requestElement.appendChild(removeButton);
         requestElement.appendChild(reloadButton);
@@ -200,10 +215,7 @@ function updateRequestSelector() {
         defaultOption.value = '';
         defaultOption.innerText = 'No requests available';
         selector.appendChild(defaultOption);
-    } else {
-        selector.value = selectedIndex;
     }
-    selectRequest(selector.value);
 }
 
 function selectRequest(index) {
@@ -211,6 +223,7 @@ function selectRequest(index) {
     requestElements.forEach((element, i) => {
         if (i === parseInt(index, 10)) {
             element.classList.add('active');
+            document.getElementById('request-selector').value = index;
         } else {
             element.classList.remove('active');
         }
