@@ -1,0 +1,222 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #121212;
+    color: #ffffff;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px;
+    padding: 20px;
+    background-color: #1e1e1e;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 600px;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+h1 {
+    text-align: left;
+    margin: 0;
+}
+
+textarea, input[type="text"] {
+    width: calc(100% - 30px);
+    padding: 15px;
+    margin: 10px 0;
+    background-color: #2e2e2e;
+    color: #ffffff;
+    border: 1px solid #444;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.requests-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+    margin-top: 20px;
+    flex-grow: 1;
+}
+
+.request {
+    padding: 20px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    background-color: #2e2e2e;
+    position: relative;
+    display: none;
+}
+
+.request.active {
+    display: block;
+}
+
+.request h3 {
+    margin-top: 0;
+    display: flex;
+    align-items: center;
+}
+
+.remove-request-button,
+.reload-request-button {
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.remove-request-button {
+    margin-right: 10px;
+}
+
+.response {
+    white-space: pre-wrap;
+    background: #3e3e3e;
+    padding: 10px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    margin-top: 10px;
+}
+
+button {
+    padding: 15px 20px;
+    margin: 10px 0;
+    background-color: #6200ee;
+    color: #ffffff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #3700b3;
+}
+
+.add-request-button {
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    background-color: #6200ee;
+    color: #ffffff;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.add-request-button:hover {
+    background-color: #3700b3;
+}
+
+.menu {
+    margin-bottom: 20px;
+}
+
+#request-selector {
+    padding: 10px;
+    font-size: 18px;
+    background-color: #2e2e2e;
+    color: #ffffff;
+    border: 1px solid #444;
+    border-radius: 4px;
+}
+
+.method-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.method-button {
+    flex: 1;
+    padding: 10px;
+    border: 2px solid #6200ee;
+    border-radius: 4px;
+    background-color: #1e1e1e;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.method-button.active {
+    background-color: #6200ee;
+    border-color: #3700b3;
+}
+
+.method-button:hover {
+    background-color: #3700b3;
+}
+
+.footer {
+    text-align: center;
+    color: #ffffff;
+    font-size: 14px;
+    padding: 10px;
+    background-color: #1e1e1e;
+    border-top: 1px solid #444;
+    margin-top: auto;
+}
+
+@media (max-width: 600px) {
+    button {
+        width: 100%;
+    }
+
+    .add-request-button {
+        width: auto;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #6200ee;
+    border-radius: 10px;
+    border: 2px solid #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #3700b3;
+}
+
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #6200ee #1e1e1e;
+}
+
+body {
+    -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
