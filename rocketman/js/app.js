@@ -90,12 +90,16 @@ function sendRequest(index) {
         }
         request.response = JSON.stringify(data, null, 2);
         saveRequests();
-        renderRequests();
+
+        // Atualize o responseDiv diretamente
+        document.getElementById(`response-${index}`).innerText = request.response;
     })
     .catch(error => {
         request.response = error.toString();
         saveRequests();
-        renderRequests();
+
+        // Atualize o responseDiv diretamente
+        document.getElementById(`response-${index}`).innerText = request.response;
     });
 }
 
@@ -163,6 +167,7 @@ function renderRequests() {
 
         const responseDiv = document.createElement('div');
         responseDiv.className = 'response';
+        responseDiv.id = `response-${index}`; // Adicionado identificador único
         responseDiv.innerText = request.response;
 
         requestElement.appendChild(removeButton);
