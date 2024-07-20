@@ -47,6 +47,10 @@ textarea, input[type="text"] {
     font-size: 16px;
 }
 
+.headers-textarea {  /* Nova classe para aumentar a altura dos headers */
+    min-height: 200px;
+}
+
 .requests-grid {
     display: grid;
     grid-template-columns: 1fr;

@@ -150,6 +150,7 @@ function renderRequests() {
         urlInput.onchange = (event) => updateRequest(index, 'url', event.target.value);
 
         const headersTextarea = document.createElement('textarea');
+        headersTextarea.className = 'headers-textarea';  // Adiciona a classe
         headersTextarea.placeholder = 'Headers (key: value)';
         headersTextarea.value = request.headers;
         headersTextarea.onchange = (event) => updateRequest(index, 'headers', event.target.value);
