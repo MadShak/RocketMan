@@ -102,6 +102,16 @@ function sendRequest(index) {
     });
 }
 
+function beautifyJSON(jsonString) {
+    try {
+        const json = JSON.parse(jsonString);
+        return JSON.stringify(json, null, 2);
+    } catch (error) {
+        alert('Invalid JSON format');
+        return jsonString;
+    }
+}
+
 function renderRequests() {
     const container = document.getElementById('selected-request-container');
     container.innerHTML = '';
@@ -150,7 +160,7 @@ function renderRequests() {
         urlInput.onchange = (event) => updateRequest(index, 'url', event.target.value);
 
         const headersTextarea = document.createElement('textarea');
-        headersTextarea.className = 'headers-textarea';  // Adiciona a classe
+        headersTextarea.className = 'headers-textarea';
         headersTextarea.placeholder = 'Headers (key: value)';
         headersTextarea.value = request.headers;
         headersTextarea.onchange = (event) => updateRequest(index, 'headers', event.target.value);
@@ -160,6 +170,19 @@ function renderRequests() {
         bodyTextarea.value = request.body;
         bodyTextarea.style.height = '150px';
         bodyTextarea.onchange = (event) => updateRequest(index, 'body', event.target.value);
+
+        const beautifyButton = document.createElement('span');
+        beautifyButton.className = 'beautify-icon';
+        beautifyButton.innerHTML = '<i class="fas fa-magic"></i>';
+        beautifyButton.onclick = () => {
+            bodyTextarea.value = beautifyJSON(bodyTextarea.value);
+            updateRequest(index, 'body', bodyTextarea.value);
+        };
+
+        const bodyContainer = document.createElement('div');
+        bodyContainer.style.position = 'relative';
+        bodyContainer.appendChild(bodyTextarea);
+        bodyContainer.appendChild(beautifyButton);
 
         const sendButton = document.createElement('button');
         sendButton.innerText = 'Send';
@@ -192,11 +215,12 @@ function renderRequests() {
         requestElement.appendChild(methodButtons);
         requestElement.appendChild(urlInput);
         requestElement.appendChild(headersTextarea);
-        requestElement.appendChild(bodyTextarea);
+        requestElement.appendChild(bodyContainer);
         requestElement.appendChild(sendButton);
         requestElement.appendChild(responseDiv);
 
         bodyTextarea.style.display = ['POST', 'PUT'].includes(request.method) ? 'block' : 'none';
+        beautifyButton.style.display = bodyTextarea.style.display;
 
         container.appendChild(requestElement);
     });

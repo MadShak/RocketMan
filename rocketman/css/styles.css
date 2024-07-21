@@ -47,7 +47,7 @@ textarea, input[type="text"] {
     font-size: 16px;
 }
 
-.headers-textarea {  /* Nova classe para aumentar a altura dos headers */
+.headers-textarea {
     min-height: 200px;
 }
 
@@ -241,4 +241,18 @@ body {
 
 body::-webkit-scrollbar {
     display: none;
+}
+
+.beautify-icon {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 20px;
+    color: #ffffff;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.beautify-icon:hover {
+    color: #6200ee;
 }
